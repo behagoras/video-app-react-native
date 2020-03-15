@@ -1,0 +1,25 @@
+import React from 'react';
+import styled from 'styled-components/native';
+
+const Container = styled.View`
+  padding-vertical: 10px;
+`;
+
+const Title = styled.Text`
+  color: #4c4c4c;
+  font-size: 20px;
+  margin-bottom: 10px;
+  margin-left: 8px;
+  font-weight: bold;
+`;
+
+const SuggestionListLayout = ({title, children}) => {
+  return (
+    <Container>
+      <Title>{title}</Title>
+      {children}
+    </Container>
+  );
+};
+
+export default SuggestionListLayout;

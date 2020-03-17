@@ -1,15 +1,22 @@
-import {createStore} from 'redux';
-import reducer from './reducers/videos';
+import {createStore, combineReducers, applyMiddleware} from 'redux';
 import {persistStore, persistReducer} from 'redux-persist';
-import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
-
+import AsyncStorage from '@react-native-community/async-storage';
+import Thunk from 'redux-thunk';
+import user from './reducers/videos';
+const reducer = combineReducers({
+  user,
+});
 const persistConfig = {
   key: 'root',
-  storage,
+  storage: AsyncStorage,
 };
-
+// const logger = store => next => action => {
+//   console.log('dispatching =>', action);
+//   let result = next(action);
+//   console.log('next state =>', store.getState());
+//   return result;
+// };
 const persistedReducer = persistReducer(persistConfig, reducer);
-const store = createStore(persistedReducer);
+const store = createStore(persistedReducer, applyMiddleware(Thunk));
 const persistor = persistStore(store);
-
 export {store, persistor};

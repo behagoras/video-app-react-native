@@ -27,7 +27,7 @@ const Overlay = styled.View`
 `;
 
 const PlayerLayout = props => {
-  console.log('props.loading', props.loading);
+  // console.log('props.loading', props.loading);
   return (
     <Container>
       <Video>{props.video}</Video>

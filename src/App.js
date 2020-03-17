@@ -8,6 +8,7 @@ import API from './utils/api';
 import {store, persistor} from './store';
 
 //Components
+import Loading from './components/sections/Loading';
 import Player from './components/player/Player';
 import Home from './containers/Home';
 import Header from './components/sections/Header';
@@ -36,7 +37,7 @@ const App = () => {
   }, []);
   return (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
+      <PersistGate loading={<Loading />} persistor={persistor}>
         <Home>
           <Header />
           <Text>Buscador</Text>

@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import {Text} from 'react-native';
 import {Provider} from 'react-redux';
+import {PersistGate} from 'redux-persist/integration/react';
 
 // Utils
 import API from './utils/api';
-import store from './store';
+import {store, persistor} from './store';
 
 //Components
 import Player from './components/player/Player';
@@ -35,13 +36,15 @@ const App = () => {
   }, []);
   return (
     <Provider store={store}>
-      <Home>
-        <Header />
-        <Text>Buscador</Text>
-        <Player />
-        <CategoryList />
-        <SuggestionList />
-      </Home>
+      <PersistGate loading={null} persistor={persistor}>
+        <Home>
+          <Header />
+          <Text>Buscador</Text>
+          <Player />
+          <CategoryList />
+          <SuggestionList />
+        </Home>
+      </PersistGate>
     </Provider>
   );
 };

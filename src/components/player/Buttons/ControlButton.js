@@ -1,5 +1,4 @@
 import React from 'react';
-import {View, Text, TouchableHighlight} from 'react-native';
 import styled from 'styled-components/native';
 
 const Container = styled.TouchableHighlight`
@@ -9,15 +8,16 @@ const Container = styled.TouchableHighlight`
   margin: 5px 10px;
   border: solid 1px white;
   border-radius: 10px;
-  background-color: gray;
+  background-color: green;
 `;
 const Button = styled.Text`
   color: white;
   font-size: 20px;
   font-weight: bold;
+  margin-top: 6px;
 `;
 
-const PlayerButton = props => {
+const ControlButton = props => {
   const {text} = props;
   return (
     <Container
@@ -34,4 +34,4 @@ const PlayerButton = props => {
   );
 };
 
-export default PlayerButton;
+export default ControlButton;

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components/native';
+import {StatusBar} from 'react-native';
 
 const Container = styled.View`
   padding-top: 56.25%;

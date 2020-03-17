@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
+import styled from 'styled-components/native';
 import {Text} from 'react-native';
 import {StyleSheet, ActivityIndicator} from 'react-native';
 import Video from 'react-native-video';
 import Layout from './PlayerLayout';
-import ControlLayout from './ControlLayout';
-import ControlButton from '../../player/Buttons/PlayerButton';
+import ControlLayout from './Buttons/ControlLayout';
+import {PlayPause, FullScreenButton} from './Buttons';
+import StatusBar from './StatusBar';
 
 const styles = StyleSheet.create({
   video: {
@@ -20,7 +22,10 @@ const styles = StyleSheet.create({
 const Player = () => {
   const [loading, setLoading] = useState(true);
   const [paused, setPaused] = useState(false);
-  const [fullscreen, setFullscreen] = useState(false);
+  // const [fullscreen, setFullscreen] = useState(false);
+  const [video, setVideo] = useState({});
+  const [progress, setProgress] = useState(0);
+  const [current, setCurrent] = useState(0);
   const onBuffer = ({isBuffering}) => {
     setLoading(isBuffering);
   };
@@ -32,13 +37,23 @@ const Player = () => {
     setPaused(!paused);
   };
   const handleFullScreen = () => {
-    setFullscreen(true);
+    video.presentFullscreenPlayer();
+    // setFullscreen(true);
+    // setPaused(false);
+  };
+
+  const onProgress = ({currentTime, playableDuration}) => {
+    setCurrent(currentTime.toFixed(0));
+    setProgress((currentTime / playableDuration) * 100);
   };
 
   return (
     <Layout
       video={
         <Video
+          ref={ref => {
+            setVideo(ref);
+          }}
           source={{
             uri:
               'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
@@ -50,22 +65,20 @@ const Player = () => {
           // controls
           paused={paused}
           onLoad={onLoad}
-          fullscreen={fullscreen}
+          onProgress={onProgress}
+          // fullscreen={fullscreen}
         />
       }
       loader={<ActivityIndicator color="red" />}
       loading={loading}
       controls={
-        <ControlLayout>
-          <ControlButton
-            onPress={playPause}
-            paused={paused}
-            text={paused ? '▶️' : '⏸️'}
-          />
-          <Text>Progress bar</Text>
-          <Text>Time left</Text>
-          <Text>Full Screen</Text>
-        </ControlLayout>
+        <ControlLayout
+          playPause={playPause}
+          progress={progress}
+          currentTime={current}
+          handleFullScreen={handleFullScreen}
+          paused={paused}
+        />
       }
     />
   );

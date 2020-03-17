@@ -6,7 +6,7 @@ import StatusBar from '../StatusBar';
 import {fancyTime} from '../../../utils/time';
 
 const Container = styled.View`
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.1);
   position: absolute;
   height: 35px;
   left: 0;

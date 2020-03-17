@@ -1,9 +1,16 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import {FlatList} from 'react-native';
 import Layout from './SuggestionListLayout';
 import Empty from '../../sections/Empty';
 import Separator from '../../sections/VerticalSeparator';
 import Suggestion from './Suggestion';
+
+const mapStateToProps = state => {
+  console.log('state', state);
+  // debugger;
+  return {list: state.categoryList};
+};
 
 const SuggestionList = ({list}) => {
   const renderEmpty = () => <Empty text="No hay sugerencias" />;
@@ -28,4 +35,4 @@ const SuggestionList = ({list}) => {
   );
 };
 
-export default SuggestionList;
+export default connect(mapStateToProps)(SuggestionList);

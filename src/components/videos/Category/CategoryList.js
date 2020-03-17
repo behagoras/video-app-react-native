@@ -1,9 +1,16 @@
 import React from 'react';
-import {View, Text, FlatList} from 'react-native';
+import {connect} from 'react-redux';
+
+import {FlatList} from 'react-native';
 import Empty from '../../sections/Empty';
 import Separator from '../../sections/VerticalSeparator';
 import Category from './Category';
 import Layout from './CategoryListLayout';
+
+const mapStateToProps = state => {
+  console.log('state', state);
+  return {list: state.categoryList};
+};
 
 const CategoryList = ({list}) => {
   const renderEmpty = () => <Empty text="No hay categorías" />;
@@ -28,4 +35,6 @@ const CategoryList = ({list}) => {
   );
 };
 
-export default CategoryList;
+const mapDispatchToProps = () => {};
+
+export default connect(mapStateToProps)(CategoryList);

@@ -1,24 +1,19 @@
-import React, {Component} from 'react';
-import {Text, View, FlatList} from 'react-native';
+import React from 'react';
+import {FlatList} from 'react-native';
 import Layout from './SuggestionListLayout';
-import Empty from '../sections/Empty';
-import Separator from '../sections/VerticalSeparator';
+import Empty from '../../sections/Empty';
+import Separator from '../../sections/VerticalSeparator';
+import Suggestion from './Suggestion';
 
-const list = [
-  {
-    title: 'Avenger',
-    key: '1',
-  },
-  {
-    title: 'Pokemon',
-    key: '2',
-  },
-];
-
-const SuggestionList = () => {
+const SuggestionList = ({list}) => {
   const renderEmpty = () => <Empty text="No hay sugerencias" />;
   const itemSeparator = () => <Separator />;
-  const renderItem = ({item}) => <Text>{item.title}</Text>;
+
+  const renderItem = ({item}) => {
+    return <Suggestion {...item} />;
+  };
+
+  const keyExtractor = item => item.id.toString();
 
   return (
     <Layout title="Recomendado para tí">
@@ -27,6 +22,7 @@ const SuggestionList = () => {
         ItemSeparatorComponent={itemSeparator}
         renderItem={renderItem}
         ListEmptyComponent={renderEmpty}
+        keyExtractor={keyExtractor}
       />
     </Layout>
   );

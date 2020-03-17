@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components/native';
 
 const Container = styled.View`
-  padding-vertical: 10px;
+  padding: 10px 0;
 `;
 
 const Title = styled.Text`

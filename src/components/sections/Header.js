@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from 'styled-components/native';
-import {View, SafeAreaView, Image} from 'react-native';
+import {SafeAreaView} from 'react-native';
 
 const Logo = styled.Image`
   width: 80px;
   height: 26px;
-  resize-mode: contain; /* equivalente a background size */
+  resize-mode: contain;
 `;
 
 const Container = styled.View`

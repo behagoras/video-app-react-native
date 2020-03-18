@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components/native';
 
-const Container = styled.View`
+const Container = styled.TouchableOpacity`
   flex-direction: row;
 `;
 const Left = styled.View``;
@@ -44,19 +44,19 @@ const GenreText = styled.Text`
   padding: 5px 7px;
 `;
 
-const Suggestion = ({medium_cover_image, genres, title, year, rating, id}) => {
+const Suggestion = props => {
   return (
-    <Container key={id}>
+    <Container onPress={props.onPress}>
       <Left>
-        <Cover source={{uri: medium_cover_image}} />
+        <Cover source={{uri: props.medium_cover_image}} />
         <Genre>
-          <GenreText>{genres[0]}</GenreText>
+          <GenreText>{props.genres[0]}</GenreText>
         </Genre>
       </Left>
       <Right>
-        <Title>{title}</Title>
-        <Year>{year}</Year>
-        <Rating>{rating}</Rating>
+        <Title>{props.title}</Title>
+        <Year>{props.year}</Year>
+        <Rating>{props.rating}</Rating>
       </Right>
     </Container>
   );

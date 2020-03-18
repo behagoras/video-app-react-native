@@ -6,12 +6,32 @@ import Empty from '../../sections/Empty';
 import Separator from '../../sections/VerticalSeparator';
 import Suggestion from './Suggestion';
 
-const SuggestionList = ({list}) => {
+const SuggestionList = props => {
+  const {list} = props;
+  console.log('props in SuggestionList', props);
+
   const renderEmpty = () => <Empty text="No hay sugerencias" />;
   const itemSeparator = () => <Separator />;
+  const viewMovie = selectedMovie => {
+    props.dispatch({
+      type: 'SET_SUGGESTION_LIST',
+      payload: {
+        selectedMovie,
+      },
+    });
+    // props.setSelectedMovie(movie);
+    // console.log('props in Movie', props);
+  };
 
   const renderItem = ({item}) => {
-    return <Suggestion {...item} />;
+    return (
+      <Suggestion
+        onPress={() => {
+          viewMovie(item);
+        }}
+        {...item}
+      />
+    );
   };
 
   const keyExtractor = item => item.id.toString();
@@ -30,9 +50,20 @@ const SuggestionList = ({list}) => {
 };
 
 const mapStateToProps = state => {
-  console.log('state', state);
+  console.log('selectedMovie', state.videos.selectedMovie);
   // debugger;
-  return {list: state.videos.categoryList || {}};
+  return {
+    list: state.videos.categoryList,
+  };
 };
 
-export default connect(mapStateToProps)(SuggestionList);
+const mapDispatchToProps = dispatch => {
+  return {
+    setSelectedMovie: () => dispatch({type: 'SET_SELECTED_MOVIE'}),
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  null,
+)(SuggestionList);

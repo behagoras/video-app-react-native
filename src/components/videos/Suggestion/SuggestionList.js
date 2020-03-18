@@ -6,12 +6,6 @@ import Empty from '../../sections/Empty';
 import Separator from '../../sections/VerticalSeparator';
 import Suggestion from './Suggestion';
 
-const mapStateToProps = state => {
-  console.log('state', state);
-  // debugger;
-  return {list: state.categoryList};
-};
-
 const SuggestionList = ({list}) => {
   const renderEmpty = () => <Empty text="No hay sugerencias" />;
   const itemSeparator = () => <Separator />;
@@ -33,6 +27,12 @@ const SuggestionList = ({list}) => {
       />
     </Layout>
   );
+};
+
+const mapStateToProps = state => {
+  console.log('state', state);
+  // debugger;
+  return {list: state.videos.categoryList || {}};
 };
 
 export default connect(mapStateToProps)(SuggestionList);

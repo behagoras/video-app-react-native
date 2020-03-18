@@ -7,11 +7,6 @@ import Separator from '../../sections/VerticalSeparator';
 import Category from './Category';
 import Layout from './CategoryListLayout';
 
-const mapStateToProps = state => {
-  console.log('state', state);
-  return {list: state.categoryList};
-};
-
 const CategoryList = ({list}) => {
   const renderEmpty = () => <Empty text="No hay categorías" />;
   const itemSeparator = () => <Separator />;
@@ -35,6 +30,9 @@ const CategoryList = ({list}) => {
   );
 };
 
-const mapDispatchToProps = () => {};
+const mapStateToProps = state => {
+  console.log('state', state);
+  return {list: state.videos.categoryList || {}};
+};
 
 export default connect(mapStateToProps)(CategoryList);

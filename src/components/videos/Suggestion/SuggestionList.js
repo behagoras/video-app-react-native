@@ -12,11 +12,12 @@ const SuggestionList = props => {
 
   const renderEmpty = () => <Empty text="No hay sugerencias" />;
   const itemSeparator = () => <Separator />;
-  const viewMovie = selectedMovie => {
+  const viewMovie = movie => {
+    console.log('viewMovie -> movie', movie);
     props.dispatch({
       type: 'SET_SELECTED_MOVIE',
       payload: {
-        selectedMovie,
+        movie,
       },
     });
     // props.setSelectedMovie(movie);
@@ -50,7 +51,7 @@ const SuggestionList = props => {
 };
 
 const mapStateToProps = state => {
-  console.log('selectedMovie', state.videos.selectedMovie);
+  // console.log('selectedMovie', state.videos.selectedMovie);
   // debugger;
   return {
     list: state.videos.categoryList,

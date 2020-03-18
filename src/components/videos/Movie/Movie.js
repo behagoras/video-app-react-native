@@ -5,6 +5,7 @@ import Player from '../../player/Player';
 import {View, Text} from 'react-native';
 import Header from '../../sections/Header';
 import {CloseButton} from '../../player/Buttons';
+import Details from '../../sections/Details';
 
 const Movie = props => {
   const closeVideo = () => {
@@ -14,14 +15,24 @@ const Movie = props => {
     });
     console.log('closing video');
   };
+  console.log('props.movie', props.movie);
+
   return (
     <Layout>
       <Header>
         <CloseButton onPress={closeVideo} />
       </Header>
       <Player />
+      <Details {...props.movie} />
     </Layout>
   );
 };
 
-export default connect(null)(Movie);
+const mapStateToProps = state => {
+  console.log('superstate', state);
+  return {
+    movie: state.videos.selectedMovie ? state.videos.selectedMovie.movie : {},
+  };
+};
+
+export default connect(mapStateToProps)(Movie);

@@ -6,8 +6,12 @@ import {View, Text} from 'react-native';
 import Header from '../../sections/Header';
 import {CloseButton} from '../../player/Buttons';
 
-const Movie = () => {
+const Movie = props => {
   const closeVideo = () => {
+    props.dispatch({
+      type: 'SET_SELECTED_MOVIE',
+      payload: null,
+    });
     console.log('closing video');
   };
   return (
@@ -20,4 +24,4 @@ const Movie = () => {
   );
 };
 
-export default Movie;
+export default connect(null)(Movie);

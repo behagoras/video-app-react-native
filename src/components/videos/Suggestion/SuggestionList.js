@@ -14,7 +14,7 @@ const SuggestionList = props => {
   const itemSeparator = () => <Separator />;
   const viewMovie = selectedMovie => {
     props.dispatch({
-      type: 'SET_SUGGESTION_LIST',
+      type: 'SET_SELECTED_MOVIE',
       payload: {
         selectedMovie,
       },
